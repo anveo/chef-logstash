@@ -4,10 +4,9 @@
 input {
   <% if node['logstash']['agent']['inputs'].empty? -%>
   file {
-    type => "sample-logs"
-    path => ["/var/log/*.log"]
+    type => "syslog"
+    path => ["/var/log/syslog"]
     exclude => ["*.gz"]
-    debug => true
   }
   <% else %>
     <%= LogstashConf.section_to_str(node['logstash']['agent']['inputs']) %>
