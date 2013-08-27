@@ -146,6 +146,10 @@ template "#{node['logstash']['basedir']}/agent/etc/shipper.conf" do
   notifies :restart, service_resource
 end
 
+link "#{node['logstash']['basedir']}/agent/etc/conf.d/shipper.conf" do
+  to "#{node['logstash']['basedir']}/agent/etc/shipper.conf"
+end
+
 if node['logstash']['agent']['init_method'] == 'runit'
   runit_service "logstash_agent"
 elsif node['logstash']['agent']['init_method'] == 'native'
